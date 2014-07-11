@@ -1,0 +1,148 @@
+<!-- Javier Blog Post Charts -->
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Components</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!-- jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- d3 -->
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <!-- c3 -->
+  <script src='https://rawgit.com/masayuki0812/c3/master/c3.js'></script>
+  <link href='https://rawgit.com/masayuki0812/c3/master/c3.css' rel='stylesheet' />
+
+  <style>
+  .c3{
+    margin-top: 20px;
+  }
+  </style>
+</head>
+
+<body>
+<h2>Total Number of Disasters</h2>
+  <h3>Centre for Research on the Epidemiology of Disasters</h3>
+  <div id="chart_8"></div>
+  <!-- new chart -->
+  <h2>People in need</h2>
+  <h3>UNHCR</h3>
+  <div id="chart_9"></div>
+  <!-- new chart -->
+  <h2>Food consumption in selected countries</h2>
+  <h3>UN World Food Programme. Food Security Analysis Service / VAM</h3>
+  <div id="chart_10"></div>
+  <script>
+    var colorTheme = ['1ebfb3','117be1', 'f2645a', '555555','ffd700'];
+
+    var chart_8 = c3.generate({
+      bindto: '#chart_8',
+      data: {
+        columns: [
+          ['Disasters', 36, 31, 52, 49, 43, 57, 79, 78, 78, 108, 74, 75, 82, 77]
+        ],
+        type: 'area-spline',
+        colors: {
+            'Disasters': colorTheme[0]
+        }
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+
+    var chart_9 = c3.generate({
+      bindto: '#chart_9',
+      data: {
+        columns: [
+          ['Refugees', 12129572,12116835,10594055,9592795,9568144,8661988,9877703,11390930,10489812,10396538,10549679,10404806,10497957,11699638],
+          ['Asylum seekers', 947926,943854,1093755,996428,885249,802174,741291,741110,825043,989169,837445,895284,928226,1168273],
+          ['Internally displaced', 5998501,5096502,4646641,4181701,5426539,6616791,12794268,13740317,14442227,15628057,14697804,15473378,17670368,23925555]
+        ],
+        colors: {
+            'Refugees': colorTheme[0],
+            'Asylum seekers': colorTheme[1],
+            'Internally displaced': colorTheme[2]
+        },
+        type: 'area'
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
+        },
+        y: {
+          label: {
+            text: '',
+            position: 'outer-top'
+          },
+          tick: {
+            format: d3.format(",")
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+    var chart_10 = c3.generate({
+      bindto: '#chart_10',
+      data: {
+        columns: [
+          ['Poor', 5,4.8,9,16.4,6.4,9.5,1.6,8.4,5.9,2,11.9,9.1,4,10.2,6.5,4.1,22.2],
+          ['Borderline', 18,22.9,17,25,30.0,16.6,3.8,23.7,19.1,11,41.2,18.3,17,12.6,38.5,18.9,22.3]
+        ],
+        type: 'bar',
+        colors: {
+            'Poor': colorTheme[0],
+            'Borderline': colorTheme[1]
+        },
+        groups: [
+          ['Benin','Burundi','Cameroon','Chad','Democratic Republic of Congo','Ethiopia','Ghana','Guinea','Haiti','Laos','Madagascar','Mozambique','Rwanda','Sao Tome and Principe','Sierra Leone','Tanzania','Yemen']
+        ]
+      },
+      axis: {
+        x: {
+          type: 'category',
+          tick: {
+              rotate: 12
+          },
+          categories: ['Benin','Burundi','Cameroon','Chad','DR Congo','Ethiopia','Ghana','Guinea','Haiti','Laos','Madagascar','Mozambique','Rwanda','ST Principe','Sierra Leone','Tanzania','Yemen']
+        },
+        y: {
+          label: {
+            text: '% of households with poor/borderline food consumption',
+            position: 'outer-middle'
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      },
+      legend: {
+          position: 'bottom'
+      }
+    });
+  </script>
+  </body>
+  </html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Components</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!-- jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- mapbox -->
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+  <!-- d3 -->
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <!-- c3 -->
+  <script src='https://rawgit.com/masayuki0812/c3/master/c3.js'></script>
+  <link href='https://rawgit.com/masayuki0812/c3/master/c3.css' rel='stylesheet' />
+  <!-- dimplejs -->
+  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+  <!-- fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+
+  <style>
+  body{
+    width: 800px;
+    margin: 0px auto;
+    text-align: center;
+    padding-bottom: 300px;
+    font-family: Arial;
+  }
+  h2 {
+    margin-top: 60px;
+    margin-bottom: 0;
+    font-family: 'Oswald', Arial;
+    font-weight: 400;
+    /*text-transform: uppercase;*/
+  }
+  h3{
+    font-weight: 300;
+    font-size: 12px;
+    font-family: 'Oswald', Arial;
+    margin:0;
+    padding:0;
+  }
+  .c3{
+    margin-top: 20px;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- new chart -->
+  <h2>Agency Contribution Per Camp</h2>
+  <div id="chart_1"></div>
+  <!-- new chart -->
+  <h2>Prioritized Food Items</h2>
+  <div id="chart_2"></div>
+  <!-- new chart -->
+  <h2>#IDP in mass events Jan – Apr 2014</h2>
+  <div id="chart_3"></div>
+  <!-- new chart -->
+  <h2>Confinement: new type of humanitarian impact</h2>
+  <div id="chart_4"></div>
+  <!-- new chart -->
+  <h2>Breakdown of total People in Need</h2>
+  <div id="chart_5"></div>
+  <!-- new chart -->
+  <h2>Monitoring and Reporting Mechanism database</h2>
+  <div id="chart_6"></div>
+  <!-- new chart -->
+  <h2>Trend Analysis of Remittances to Yemen</h2>
+  <div id="chart_7"></div>
+  <!-- new chart -->
+  <h2>Total Number of Disasters</h2>
+  <h3>Centre for Research on the Epidemiology of Disasters</h3>
+  <div id="chart_8"></div>
+  <!-- new chart -->
+  <h2>People in need</h2>
+  <h3>UNHCR</h3>
+  <div id="chart_9"></div>
+  <!-- new chart -->
+  <h2>Food consumption in selected countries</h2>
+  <h3>UN World Food Programme. Food Security Analysis Service / VAM</h3>
+  <div id="chart_10"></div>
+  <script>
+    var colorTheme = ['1ebfb3','117be1', 'f2645a', '555555','ffd700'];
+    var chart_1 = c3.generate({
+      bindto: '#chart_1',
+      data: {
+        columns: [
+          ['Urban', 200, 40, 25, 40, 60],
+          ['Kakuma', 125, 20, 10, 20, 50],
+          ['Dadaab', 20, 10, 2, 1, 5],
+        ],
+        type: 'bar',
+        colors: {
+            'Urban': colorTheme[0],
+            'Kakuma': colorTheme[1],
+            'Dadaab': colorTheme[2]
+        },
+        groups: [
+          ['Urban', 'Kakuma', 'Dadaab']
+        ]
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['CNA', 'UNHCR', 'Partners', 'WFP', 'GAP']
+        },
+        y: {
+          label: {
+            text: 'Figures in Millions',
+            position: 'outer-middle'
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+    var chart_2 = c3.generate({
+      bindto: '#chart_2',
+      data: {
+        columns: [
+          ['Need', 10, 11, 28, 7, 6, 23, 16, 10, 16, 122],
+          ['Contribution', 4, 20, 22, 3, 4, 20, 4, 5, 9, 70],
+          ['Gap', 2, 5, 6, 5, 1, 7, 10, 3, 8, 50],
+        ],
+        type: 'bar',
+        colors: {
+            Need: colorTheme[0],
+            Contribution: colorTheme[1],
+            Gap: colorTheme[2]
+        }
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['Water', 'Health', 'Child Protection', 'Shelter', 'Protection']
+        },
+        y: {
+          label: {
+            text: 'Figures in Millions',
+            position: 'outer-middle'
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+    var chart_3 = c3.generate({
+      bindto: '#chart_3',
+      data: {
+        columns: [
+          ['IDP', 1680, 1526, 2803, 1029]
+        ],
+        type: 'spline',
+        colors: {
+            IDP: colorTheme[0]
+        }
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['J 2014', 'F', 'M', 'A 2014']
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: false
+          }
+      }
+    });
+    var chart_4 = c3.generate({
+      bindto: '#chart_4',
+      data: {
+        columns: [
+          ['due to protests', 175698],
+          ['due to conflict', 94606]
+        ],
+        colors: {
+            'due to protests': colorTheme[0],
+            'due to conflict': colorTheme[1]
+        },
+        type: 'donut'
+      },
+        donut: {
+            title: "270,304 confined in 2013",
+            onclick: function (d, i) { console.log(d, i); },
+            onmouseover: function (d, i) { console.log(d, i); },
+            onmouseout: function (d, i) { console.log(d, i); }
+        }
+    });
+    var chart_5 = c3.generate({
+      bindto: '#chart_5',
+      data: {
+        columns: [
+          ['refugees', 243000],
+          ['Migrants & Asylum Seekers', 165000],
+          ['Internal Displaced', 307000],
+          ['Returness', 228000],
+          ['Non-displaced', 13757000]
+        ],
+        colors: {
+            'refugees': colorTheme[0],
+            'Migrants & Asylum Seekers': colorTheme[1],
+            'Internal Displaced': colorTheme[2],
+            'Returness': colorTheme[3],
+            'Non-displaced': colorTheme[4]
+        },
+        type: 'pie'
+      },
+      donut: {
+        onclick: function (d, i) { console.log(d, i); },
+        onmouseover: function (d, i) { console.log(d, i); },
+        onmouseout: function (d, i) { console.log(d, i); }
+      }
+    });
+
+    var chart_6_container = dimple.newSvg("#chart_6", 600, 400);
+    var chart_6_data = [
+      { "Mechanism":"Attacks on schools and hospitals", "Period":"Jan-Jun 2012", "Violations":146 },
+      { "Mechanism":"Attacks on schools and hospitals", "Period":"Jan-Jun 2013", "Violations":30 },
+      { "Mechanism":"Killing and maining", "Period":"Jan-Jun 2012", "Violations":84 },
+      { "Mechanism":"Killing and maining", "Period":"Jan-Jun 2013", "Violations":48 },
+      { "Mechanism":"Denial of humanitarian access", "Period":"Jan-Jun 2012", "Violations":25 },
+      { "Mechanism":"Denial of humanitarian access", "Period":"Jan-Jun 2013", "Violations":10 },
+      { "Mechanism":"Recruitment by armed groups", "Period":"Jan-Jun 2012", "Violations":14 },
+      { "Mechanism":"Recruitment by armed groups", "Period":"Jan-Jun 2013", "Violations":21 },
+      { "Mechanism":"Rape or other grave sexual violence", "Period":"Jan-Jun 2012", "Violations":0 },
+      { "Mechanism":"Rape or other grave sexual violence", "Period":"Jan-Jun 2013", "Violations":1 },
+      { "Mechanism":"Abduction", "Period":"Jan-Jun 2012", "Violations":1 },
+      { "Mechanism":"Abduction", "Period":"Jan-Jun 2013", "Violations":1 }
+    ];
+    var chart_6 = new dimple.chart(chart_6_container, chart_6_data);
+    chart_6.defaultColors = [
+        new dimple.color('#' + colorTheme[0]),
+        new dimple.color('#' + colorTheme[1]),
+        new dimple.color('#' + colorTheme[2])
+    ];
+    chart_6.setBounds(200, 40, 800, 300)
+    chart_6.addMeasureAxis("x", "Violations");
+    chart_6.addCategoryAxis("y", ["Mechanism", "Period"]);
+    chart_6.addSeries("Period", dimple.plot.bar);
+    chart_6.addLegend(100, 10, 500, 200, "right");
+    chart_6.draw();
+
+    var chart_7 = c3.generate({
+      bindto: '#chart_7',
+      data: {
+        columns: [
+          ['millions', 1288, 1295, 1294, 1270, 1283, 1283, 1283, 1322, 1411, 1160, 1526, 1404]
+        ],
+        colors: {
+            'millions': colorTheme[0]
+        },
+        type: 'area'
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011']
+        },
+        y: {
+          label: {
+            text: 'Millions',
+            position: 'outer-top'
+          }
+        }
+      },
+    });
+
+    var chart_8 = c3.generate({
+      bindto: '#chart_8',
+      data: {
+        columns: [
+          ['Disasters', 36, 31, 52, 49, 43, 57, 79, 78, 78, 108, 74, 75, 82, 77]
+        ],
+        type: 'area-spline',
+        colors: {
+            'Disasters': colorTheme[0]
+        }
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+
+    var chart_9 = c3.generate({
+      bindto: '#chart_9',
+      data: {
+        columns: [
+          ['Refugees', 12129572,12116835,10594055,9592795,9568144,8661988,9877703,11390930,10489812,10396538,10549679,10404806,10497957,11699638],
+          ['Asylum seekers', 947926,943854,1093755,996428,885249,802174,741291,741110,825043,989169,837445,895284,928226,1168273],
+          ['Internally displaced', 5998501,5096502,4646641,4181701,5426539,6616791,12794268,13740317,14442227,15628057,14697804,15473378,17670368,23925555]
+        ],
+        colors: {
+            'Refugees': colorTheme[0],
+            'Asylum seekers': colorTheme[1],
+            'Internally displaced': colorTheme[2]
+        },
+        type: 'area'
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013']
+        },
+        y: {
+          label: {
+            text: '',
+            position: 'outer-top'
+          },
+          tick: {
+            format: d3.format(",")
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      }
+    });
+    var chart_10 = c3.generate({
+      bindto: '#chart_10',
+      data: {
+        columns: [
+          ['Poor', 5,4.8,9,16.4,6.4,9.5,1.6,8.4,5.9,2,11.9,9.1,4,10.2,6.5,4.1,22.2],
+          ['Borderline', 18,22.9,17,25,30.0,16.6,3.8,23.7,19.1,11,41.2,18.3,17,12.6,38.5,18.9,22.3]
+        ],
+        type: 'bar',
+        colors: {
+            'Poor': colorTheme[0],
+            'Borderline': colorTheme[1]
+        },
+        groups: [
+          ['Benin','Burundi','Cameroon','Chad','Democratic Republic of Congo','Ethiopia','Ghana','Guinea','Haiti','Laos','Madagascar','Mozambique','Rwanda','Sao Tome and Principe','Sierra Leone','Tanzania','Yemen']
+        ]
+      },
+      axis: {
+        x: {
+          type: 'category',
+          tick: {
+              rotate: 12
+          },
+          categories: ['Benin','Burundi','Cameroon','Chad','DR Congo','Ethiopia','Ghana','Guinea','Haiti','Laos','Madagascar','Mozambique','Rwanda','ST Principe','Sierra Leone','Tanzania','Yemen']
+        },
+        y: {
+          label: {
+            text: '% of households with poor/borderline food consumption',
+            position: 'outer-middle'
+          }
+        }
+      },
+      grid: {
+          x: {
+              show: false
+          },
+          y: {
+              show: true
+          }
+      },
+      legend: {
+          position: 'bottom'
+      }
+    });
+  </script>
+</body>
+
+</html>
