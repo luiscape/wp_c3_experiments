@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<h2>Total Number of Disasters</h2>
+  <h2>Total Number of Disasters</h2>
   <h3>Centre for Research on the Epidemiology of Disasters</h3>
   <div id="chart_8"></div>
   <!-- new chart -->
@@ -31,6 +31,7 @@
   <h2>Food consumption in selected countries</h2>
   <h3>UN World Food Programme. Food Security Analysis Service / VAM</h3>
   <div id="chart_10"></div>
+
   <script>
     var colorTheme = ['1ebfb3','117be1', 'f2645a', '555555','ffd700'];
 
@@ -60,7 +61,9 @@
           }
       }
     });
+    </script>
 
+  <script>
     var chart_9 = c3.generate({
       bindto: '#chart_9',
       data: {
@@ -100,6 +103,9 @@
           }
       }
     });
+  </script>
+  
+  <script>
     var chart_10 = c3.generate({
       bindto: '#chart_10',
       data: {
